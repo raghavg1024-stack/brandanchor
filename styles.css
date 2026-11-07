@@ -1,0 +1,137 @@
+/* Hallmark-informed proof desk: a working campaign with evidence in the margin. */
+/* Review, revise and approve are the focal actions. */
+:root {
+  --paper: #f3eee3; --surface: #fffaf0; --ink: #1c1b18; --muted: #5b574e;
+  --rule: #cfc6b2; --edge: #827761; --green: #1f4d3f; --pale: #e3ebdf;
+  --red: #982b1a; --ochre: #754b00; --blue: #2b4a6f;
+  --white: #fff; --shadow: #1c1b1822;
+  --serif: Georgia, serif; --sans: system-ui, sans-serif; --mono: ui-monospace, monospace;
+}
+* { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+body { margin: 0; color: var(--ink); background: var(--paper); font: 15px/1.55 var(--sans); }
+.shell { width: min(100% - 48px, 1240px); margin-inline: auto; }
+.mast { background: var(--ink); color: var(--paper); }
+.bar { display: flex; align-items: center; gap: 20px; min-height: 62px; }
+.brand { font: bold 22px var(--serif); color: inherit; text-decoration: none; white-space: nowrap; }
+.mark { color: var(--paper); margin-right: 5px; }
+.mast-note { margin-right: auto; font-size: .82rem; }
+.mast button { color: var(--paper); border-color: var(--rule); }
+.mast :focus-visible { outline-color: var(--paper); }
+.intro { display: flex; justify-content: space-between; align-items: end; gap: 20px; padding: 38px 0 24px; }
+.context, .hint, footer { color: var(--muted); font-size: .82rem; }
+.context { margin: 0 0 8px; }
+h1, h2 { font-family: var(--serif); overflow-wrap: break-word; min-width: 0; }
+h1 { font-size: clamp(2.25rem, 6vw, 4.6rem); font-weight: 500; line-height: 1; letter-spacing: -.055em; margin: 0; }
+h2 { font-size: 1.38rem; margin: 0; }
+.intro p:last-child { margin-bottom: 0; }
+.role { min-width: 185px; }
+.steps { display: flex; flex-wrap: wrap; gap: 9px 24px; padding: 12px 0; border-block: 1px solid var(--rule); margin-bottom: 24px; color: var(--muted); }
+.steps [aria-current] { color: var(--green); font-weight: 750; }
+.grid { display: grid; grid-template-columns: minmax(0, 1.38fr) minmax(0, 1fr); gap: 34px; align-items: start; }
+.proof { background: var(--surface); box-shadow: 0 3px 14px var(--shadow); border: 1px solid var(--rule); padding: clamp(16px, 3vw, 30px); }
+.section-head { display: flex; align-items: baseline; gap: 10px; justify-content: space-between; border-bottom: 1px solid var(--rule); padding-bottom: 8px; margin-bottom: 14px; }
+.section-head span { font: .75rem var(--mono); color: var(--muted); }
+.panel { margin-bottom: 23px; }
+.evidence { border-left: 3px solid var(--green); padding-left: 15px; }
+label { display: block; font-weight: 680; margin: 10px 0 4px; }
+input, select, textarea, button { font: inherit; }
+input, select, textarea { width: 100%; padding: 8px 10px; border: 1px solid var(--edge); border-radius: 2px; background: var(--surface); color: var(--ink); }
+textarea { resize: vertical; }
+button { cursor: pointer; color: var(--white); background: var(--green); border: 1px solid var(--green); border-radius: 2px; padding: 8px 12px; font-weight: 650; }
+button.quiet { background: transparent; color: var(--ink); border-color: var(--edge); }
+.mast button.quiet { color: var(--paper); border-color: var(--rule); }
+button:disabled { opacity: .57; cursor: default; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.banner { margin: 18px 0 12px; background: var(--green); color: var(--white); padding: clamp(16px, 4vw, 30px); display: grid; gap: 12px; }
+.banner strong { font: clamp(1.4rem, 4vw, 2.5rem)/1.15 var(--serif); overflow-wrap: anywhere; }
+.banner span, .banner small { font-size: .78rem; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 13px; }
+blockquote { font: 1.18rem/1.45 var(--serif); margin: 0 0 12px; }
+dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; font-size: .85rem; }
+dt { color: var(--muted); }
+dd { margin: 0; }
+.finding { padding: 9px 0; border-bottom: 1px solid var(--rule); }
+.finding p { margin: 5px 0; overflow-wrap: anywhere; }
+.bad { color: var(--red); }
+.good { color: var(--green); }
+.pending { color: var(--ochre); }
+.receipt { border-block: 1px solid var(--rule); padding: 10px 0; font: .79rem/1.6 var(--mono); overflow-wrap: anywhere; }
+.readiness { font-weight: 650; }
+.notice { min-height: 1.6rem; color: var(--green); }
+footer { padding: 12px 0 20px; border-top: 1px solid var(--rule); }
+[hidden] { display: none !important; }
+@media (max-width: 760px) { .grid { grid-template-columns: minmax(0, 1fr); gap: 24px; } .intro { align-items: start; flex-direction: column; padding-top: 24px; } .mast-note { display: none; } .bar { justify-content: space-between; } .shell { width: calc(100% - 28px); } }
+.model-review { border: 1px solid var(--rule); padding: 14px; }
+.model-review select { margin-bottom: 8px; }
+.model-review p { overflow-wrap: anywhere; }
+#model-proposal { border-top: 1px solid var(--rule); margin-top: 14px; }
+#model-proposal strong + p { margin-top: 2px; white-space: pre-wrap; }
+.model-settings { border-top: 1px solid var(--rule); margin-top: 16px; padding-top: 12px; }
+.model-settings summary { cursor: pointer; font-weight: 700; color: var(--green); }
+.model-settings form button { margin-top: 12px; }
+
+/* Proof desk workspace */
+.desk { --surface: #fffdf6; --paper: #f3eee2; }
+.desk .intro { padding-block: 32px 22px; }
+.desk .intro h1 { font-size: clamp(2.3rem, 5vw, 4rem); }
+.desk .mast-note { margin-right: 0; }
+.desk-nav { display: flex; gap: 16px; margin-left: auto; }
+.desk-nav a { color: var(--paper); font-size: .86rem; text-underline-offset: 4px; }
+.desk .steps { margin-bottom: 20px; }
+.desk .grid { gap: 24px; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+.desk .margin > .panel { background: var(--surface); border: 1px solid var(--rule); padding: 15px 17px; margin-bottom: 13px; }
+.desk .margin > .evidence { border-left: 3px solid var(--green); }
+.draft-tools, .desk-records { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 14px; }
+.draft-tools > input { grid-row: 2; min-width: 0; font-size: .82rem; }
+.draft-tools input::file-selector-button { background: var(--pale); color: var(--ink); border: 0; padding: 4px 7px; margin-right: 7px; cursor: pointer; }
+.draft-context { margin: 13px 0; padding-block: 8px; border-block: 1px solid var(--rule); }
+.draft-context summary { cursor: pointer; color: var(--green); }
+.image-proof { margin: 16px 0 10px; display: grid; }
+.image-proof img, #image-boxes { grid-area: 1 / 1; }
+.image-proof img { width: 100%; display: block; }
+#image-boxes { position: relative; pointer-events: none; }
+#image-boxes span { position: absolute; outline: 2px solid var(--ochre); background: #f1d88e30; }
+.image-proof figcaption { padding-top: 6px; font-size: .82rem; color: var(--muted); }
+.desk-records { align-items: start; margin-top: 20px; gap: 24px; }
+#activity { padding-left: 21px; overflow-wrap: anywhere; }
+#activity li { margin-block: 6px; }
+#notice:not(:empty) { position: sticky; bottom: 12px; background: var(--pale); padding: 8px 12px; border: 1px solid var(--green); }
+@media (max-width: 760px) {
+  .desk .grid, .desk-records { grid-template-columns: minmax(0, 1fr); }
+  .desk .bar { flex-wrap: wrap; padding-block: 10px; gap: 8px; }
+  .desk-nav { order: 3; width: 100%; margin-left: 0; padding-block: 5px; }
+}
+@media (max-width: 420px) {
+  .draft-tools { grid-template-columns: minmax(0, 1fr); }
+  .draft-tools > input { grid-row: auto; }
+}
+
+.desk {
+  --paper: #f8e9ce; --surface: #fff6e5; --ink: #33221d; --muted: #64483d;
+  --rule: #d0ac89; --edge: #94684f; --green: #344b55; --pale: #e1e8e8;
+  --red: #932e23; --ochre: #79420f; --blue: #3b5361;
+}
+
+.demo-guide {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 0 0 24px;
+  padding: clamp(16px, 3vw, 26px);
+  color: #fff6e5;
+  background: #344b55;
+  border-radius: 3px;
+  box-shadow: 0 6px 18px #33221d18;
+}
+.demo-guide .context { margin: 0 0 4px; color: #f4d699; }
+.demo-guide h2 { font-size: clamp(1.5rem, 3.3vw, 2.15rem); }
+.demo-guide p:last-child { max-width: 65ch; margin: 6px 0 0; }
+.demo-guide-actions { display: grid; justify-items: start; gap: 8px; flex-shrink: 0; }
+.demo-guide-actions button { color: #33221d; background: #f4d699; border-color: #f4d699; }
+.demo-guide-actions a { color: inherit; font-size: .86rem; text-underline-offset: 4px; }
+.demo-guide :focus-visible { outline-color: #fff6e5; }
+@media (max-width: 680px) {
+  .demo-guide { flex-direction: column; align-items: flex-start; }
+}

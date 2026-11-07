@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BrandAnchor — Campaign proof desk</title>
+<link rel="stylesheet" href="styles.css">
+<script src="review.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body class="desk">
+<header class="mast"><div class="shell bar"><a class="brand" href="./index.html"><span class="mark" aria-hidden="true">◈</span> BrandAnchor</a><span class="mast-note">Lumen Analytics / Demo workspace</span><nav class="desk-nav" aria-label="Workspace"><a href="#draft-title">Draft</a><a href="#findings-title">Review</a><a href="#library-title">Evidence</a><a href="#activity-title">Activity</a></nav><button id="reset" class="quiet" type="button">Reset demo</button></div></header>
+<main class="shell">
+<div class="intro"><div><p class="context">Campaigns / Winter Onboarding Launch</p><h1>Campaign proof desk</h1><p>Review the copy and banner against approved evidence before launch.</p></div><label class="role">Demo role<select id="role"><option value="creator">Creator · Priya</option><option value="reviewer">Reviewer · Dana</option><option value="owner">Library owner · Morgan</option></select></label></div>
+<nav class="steps" aria-label="Review progress"><span id="step-draft">01 Draft</span><span id="step-review">02 Review</span><span id="step-ready">03 Launch readiness</span></nav>
+<section class="demo-guide" aria-labelledby="demo-guide-title">
+  <div><p class="context">Guided campaign demo</p><h2 id="demo-guide-title">From draft to approval</h2><p id="demo-guide-copy">Submit the sample campaign to see which claims need evidence.</p></div>
+  <div class="demo-guide-actions"><button type="button" id="demo-next">Review sample draft</button><a href="sample-banner.png" download>Download sample banner</a></div>
+</section>
+<div class="grid">
+<section class="proof" aria-labelledby="draft-title">
+<div class="section-head"><h2 id="draft-title">Campaign draft</h2><span id="version">Working copy</span></div>
+<form id="draft-form">
+<div class="draft-tools">
+<label for="copy-file">Import caption <span class="hint">.txt or .md</span></label><input id="copy-file" type="file" accept=".txt,.md,text/plain,text/markdown">
+<label for="image-file">Upload banner <span class="hint">PNG, JPEG or WebP</span></label><input id="image-file" type="file" accept="image/png,image/jpeg,image/webp">
+</div>
+<details class="draft-context"><summary>Campaign details</summary><div class="draft-tools"><label>Origin<input id="origin" maxlength="100" placeholder="Marketing team"></label><label>Audience<input id="audience" maxlength="100" placeholder="Pro-plan teams"></label><label>Purpose<input id="purpose" maxlength="100" placeholder="Onboarding launch"></label><label>Call to action<input id="cta" maxlength="100" placeholder="Book a demo"></label></div></details>
+<label for="caption">Caption</label><textarea id="caption" rows="4" required maxlength="1500"></textarea>
+<div class="banner" id="banner"><span>Lumen Analytics / Winter launch</span><strong id="banner-preview"></strong><small>Book a 15-minute demo</small></div>
+<figure id="image-proof" class="image-proof" hidden><img id="banner-image" alt=""><div id="image-boxes" aria-hidden="true"></div><figcaption id="image-caption"></figcaption></figure>
+<div id="image-actions" class="actions" hidden>
+<button id="scan-image" type="button" class="quiet">Read image text</button>
+<button id="verify-image" type="button" class="quiet">Verify transcription</button>
+<button id="no-image-text" type="button" class="quiet">Confirm no image text</button>
+<button id="remove-image" type="button" class="quiet">Remove image</button>
+</div>
+<p id="ocr-status" class="hint" role="status"></p>
+<label for="banner-text">Banner copy</label><textarea id="banner-text" rows="2" maxlength="600"></textarea>
+<p class="hint">For an uploaded image, review the text read from the banner here.</p>
+<label for="alt">Alternative text</label><input id="alt" maxlength="600">
+<details class="draft-context"><summary>Visual declarations</summary><p class="hint">Declare the banner font and colors to check them against the demo brand rules.</p><div class="draft-tools"><label>Banner font<select id="font"><option value="">Unspecified</option><option>Georgia</option><option>System sans</option><option>Other</option></select></label><label>Text color<input type="color" id="ink-color" value="#1c1b18"></label><label>Background color<input type="color" id="paper-color" value="#f3eee3"></label></div></details>
+<div class="actions"><button type="submit" id="submit">Submit for review</button><button type="button" class="quiet" id="use-wording">Use approved wording</button></div>
+</form>
+</section>
+<aside class="margin" aria-label="Review and approval">
+<section class="panel" aria-labelledby="findings-title"><div class="section-head"><h2 id="findings-title">Review notes</h2><span id="count"></span></div><div id="findings"></div></section>
+<p id="review-coverage" class="hint"></p>
+<section class="panel model-review" aria-labelledby="model-title">
+<div class="section-head"><h2 id="model-title">Model assistant</h2></div>
+<p id="model-status" class="hint" role="status">Using approved wording from the demo evidence library.</p>
+<label for="model-field">Review a sentence in</label>
+<select id="model-field"><option value="caption">Caption</option><option value="banner">Banner copy</option></select>
+<p id="model-hint" class="hint">Review the first sentence against the approved claim. You can preview the edit before applying it.</p>
+<button id="model-request" type="button" class="quiet" disabled>Request suggestion</button>
+<div id="model-proposal" hidden>
+<p id="model-explanation"></p>
+<strong>Before</strong><p id="model-before"></p>
+<strong>Suggested wording</strong><p id="model-after"></p>
+<button id="model-apply" type="button">Apply suggestion</button>
+<button id="model-dismiss" type="button" class="quiet">Dismiss</button>
+</div>
+<details class="model-settings">
+<summary>Connect your LLM</summary>
+<form id="model-connect" method="post" autocomplete="off">
+<label for="provider">Provider</label>
+<select id="provider"><option value="ollama">Ollama</option><option value="compatible">Compatible chat completions API</option></select>
+<label for="model-url">Endpoint URL</label>
+<input id="model-url" type="url" maxlength="2048" placeholder="http://127.0.0.1:11434/api/chat">
+<p class="hint" id="endpoint-hint">Leave blank to use Ollama on this computer.</p>
+<label for="model-name">Model name</label>
+<input id="model-name" required maxlength="200" placeholder="qwen3:4b-instruct">
+<label for="model-token">API token (if required)</label>
+<input id="model-token" type="password" maxlength="4096" autocomplete="new-password">
+<p class="hint" id="connection-note">The connection test sends a sample sentence. Settings stay active until the local server restarts.</p>
+<button id="model-connect-button" type="submit" class="quiet" disabled>Test and connect</button>
+<p id="model-connect-status" class="hint" role="status"></p>
+</form>
+</details>
+</section>
+<section class="panel evidence" aria-labelledby="evidence-title"><div class="section-head"><h2 id="evidence-title">Approved evidence</h2><span>C-014 / v2</span></div><blockquote id="wording"></blockquote><dl><dt>Source</dt><dd>2025 onboarding pilot · Pro plan</dd><dt>Valid through</dt><dd id="expiry"></dd><dt>Status</dt><dd id="evidence-status"></dd></dl><div class="actions owner-only"><button type="button" class="quiet" id="withdraw">Withdraw C-014</button><button type="button" class="quiet" id="unrelated">Update unrelated claim</button></div></section>
+<section class="panel" aria-labelledby="readiness-title"><div class="section-head"><h2 id="readiness-title">Launch readiness</h2></div><label for="launch">Planned launch date</label><input id="launch" type="date" required><p id="readiness" class="readiness"></p><div class="actions"><button type="button" id="approve">Approve version</button><button type="button" class="quiet" id="check">Check launch readiness</button></div><p class="hint">Simulated check. Nothing is published.</p><div id="receipt" class="receipt" hidden></div></section>
+</aside></div>
+<div class="desk-records">
+<section class="panel proof"><div class="section-head"><h2 id="library-title">Evidence library</h2></div><div id="library-list"></div></section>
+<section class="panel proof"><div class="section-head"><h2 id="activity-title">Review activity</h2></div>
+<form id="comment-form"><label for="comment">Comment, flag a claim, or explain a dispute</label><textarea id="comment" rows="2" required maxlength="600"></textarea><div class="actions"><button type="submit">Record comment</button><button id="flag-claim" type="button" class="quiet">Flag for review</button><button id="dispute" type="button" class="quiet">Record dispute</button></div></form>
+<ol id="activity"></ol><h3>Draft versions</h3><div id="revision-list"></div></section>
+</div>
+<p id="notice" class="notice" role="status" aria-live="polite"></p>
+<footer>BrandAnchor prototype · Synthetic campaign and simulated roles</footer>
+</main>
+</body></html>
+
+
+
